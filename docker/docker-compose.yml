@@ -1,0 +1,26 @@
+version: '2.1'
+
+services:
+  # Definice containeru aplikace.
+  nette-sandbox:
+    container_name: 'nette-sandbox'
+    build:
+      context: ./
+    ports:
+      - '80:80'
+    volumes:
+      - ./../:/var/www/html
+    links:
+      - nette-sandbox-mysql:mysql.container
+
+  # Definice MySQL containeru.
+  nette-sandbox-mysql:
+    container_name: 'nette-sandbox-mysql'
+    image: mariadb:10.4
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: maeZfu8rR3w4QfN7
+    ports:
+      - 3306:3306
+    volumes:
+      - ./volumes/mysql-data:/var/lib/mysql:delegated
