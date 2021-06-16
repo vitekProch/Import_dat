@@ -6,35 +6,62 @@ namespace App\Presenters;
 
 use App\Model\Product;
 use App\Model\Category;
+use App\Repository\CategoryRepository;
+use App\Repository\ProductRepository;
 
 final class HomepagePresenter extends BasePresenter
 {
+    private const FILE_PATH = __DIR__ . "/../../data.txt";
 
-    public function handlePridej_data()
+
+    /**
+     * @param int|null $x
+     * @return int|null
+     */
+    public function actionPridej_data(?int $x): ?int
     {
-        $file = "C:\Users\Vitek\Desktop\data.txt";
-        $document = file_get_contents($file); //Načteí souboru
+        $document = file_get_contents(self::FILE_PATH); //Načteí souboru
 
-        $pole = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]; //Předdefinované pole (kvůli tomu že některé indexy chybí)
 
 
         $pole_produktu = explode("*", $document); //Rozdělení souboru na jeden produkt podle '*'
 
+        foreach ($pole_produktu as $key => $product)
+        {
+
+        }
         for ($a = 1; $a < count($pole_produktu); $a++) {
-            $pole_jednoho_produktu = explode("|", $pole_produktu[$a]); // Rozdělení produktu na jednotlivé části podle '|'
-            for ($b = 0; $b < count($pole_jednoho_produktu); $b++) {
-                $pole[$b] = $pole_jednoho_produktu[$b];
-                $product1 = new Product($pole[0], $pole[1], $pole[3], $pole[4], $pole[5], $pole[6], $pole[7], $pole[8], $pole[9], $pole[10], $pole[11], $pole[12], $pole[13]); //Použití přepravky pro produkty
+            $poleJednohoProduktu = explode("|", $pole_produktu[$a]); // Rozdělení produktu na jednotlivé části podle '|'
+            for ($b = 0; $b < count($poleJednohoProduktu); $b++) {
+
+                //Použití přepravky pro produkty
+                $product1 = new Product(
+                    $poleJednohoProduktu[0],
+                    $poleJednohoProduktu[1],
+                    $poleJednohoProduktu[3],
+                    $poleJednohoProduktu[4],
+                    $poleJednohoProduktu[5],
+                    $poleJednohoProduktu[6],
+                    $poleJednohoProduktu[7],
+                    $poleJednohoProduktu[8],
+                    $poleJednohoProduktu[9],
+                    $poleJednohoProduktu[10],
+                    $poleJednohoProduktu[11],
+                    $poleJednohoProduktu[12] ?? NULL,
+                    $poleJednohoProduktu[13] ?? NULL
+                );
 
             }
-            $this->productRepository->pridej_product($product1); // Zapsání produktu do dtb
+            $productRow = $this->productRepository->pridej_product($product1); // Zapsání produktu do dtb
 
-            $pole_rozdeleno = explode(";", $pole[2]); //Rozdělení katerorii podle ';'
+            $joinedCategories = $poleJednohoProduktu[2];
+            $pole_rozdeleno = explode(";", $joinedCategories); //Rozdělení katerorii podle ';'
             $pole_category = array_filter($pole_rozdeleno); //Odstranění přebytečných mezer
             for ($c = 0; $c < count($pole_category); $c++) {
-                $category1 = new Category($a, $pole_category[$c]); //Použití přepravky pro kategorie
+                $category1 = new Category($productRow->id, $pole_category[$c]); //Použití přepravky pro kategorie
                 $this->categoryRepository->pridej_category($category1); //Zapsání kategorii do dtb
             }
         }
+        $this->terminate();
     }
 }
