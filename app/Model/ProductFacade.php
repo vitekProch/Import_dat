@@ -4,19 +4,26 @@
 namespace App\Model;
 
 
+use App\Repository\CategoryRepository;
+use App\Repository\ProductRepository;
+
 class ProductFacade
 {
+    public function __construct(ProductRepository $productRepository, CategoryRepository $categoryRepository)
+    {
+        $this->productRepository = $productRepository;
+        $this->categoryRepository = $categoryRepository;
+    }
     public function xx()
     {
-        $document = file_get_contents(self::FILE_PATH); //Načteí souboru
-
-
-
-        $poleProduktu = explode("*", $document); //Rozdělení souboru na jeden produkt podle '*'
-        // Rozdělení produktu na jednotlivé části podle '|'
+        $file = "C:\Users\Vitek\Desktop\data.txt";
+        //Načteí souboru
+        $document = file_get_contents($file);
+        //Rozdělení souboru na jeden produkt podle '*'
+        $poleProduktu = explode("*", $document);
         foreach ($poleProduktu as $key => $product)
         {
-            $poleJednohoProduktu = explode("|", $poleProduktu[$product]);
+            $poleJednohoProduktu = explode("|", $poleProduktu[$key]);
             foreach ($poleJednohoProduktu as $product2)
             {
                 $product2 = new Product(
@@ -34,15 +41,20 @@ class ProductFacade
                     $poleJednohoProduktu[12] ?? NULL,
                     $poleJednohoProduktu[13] ?? NULL
                 );
-                $productRow = $this->productRepository->pridej_product($product2); // Zapsání produktu do dtb
+            }
+            // Zapsání produktu do dtb
+            $productRow = $this->productRepository->pridejProduct($product2);
 
-                $joinedCategories = $poleJednohoProduktu[2];
-                $pole_rozdeleno = explode(";", $joinedCategories); //Rozdělení katerorii podle ';'
-                $pole_category = array_filter($pole_rozdeleno); //Odstranění přebytečných mezer
-                for ($c = 0; $c < count($pole_category); $c++) {
-                    $category1 = new Category($productRow->id, $pole_category[$c]); //Použití přepravky pro kategorie
-                    $this->categoryRepository->pridej_category($category1); //Zapsání kategorii do dtb
-                }
+            $joinedCategories = $poleJednohoProduktu[2] ?? '';
+            //Rozdělení katerorii podle ';'
+            $poleRozdeleno = explode(";", $joinedCategories);
+            //Odstranění přebytečných mezer
+            $poleCategory = array_filter($poleRozdeleno);
+            foreach ($poleCategory as $category) {
+                //Použití přepravky pro kategorie
+                $category1 = new Category($productRow->id, $category);
+                //Zapsání kategorii do dtb
+                $this->categoryRepository->pridejCategory($category1);
             }
         }
     }

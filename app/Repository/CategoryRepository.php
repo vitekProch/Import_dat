@@ -2,11 +2,12 @@
 
 namespace App\Repository;
 
+
 use App\Model\Category;
 
 class CategoryRepository extends BaseRepository
 {
-    public function pridej_category(Category $category)
+    public function pridejCategory(Category $category)
     {
         $this->database->table('product_category')
             ->insert([

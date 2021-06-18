@@ -6,7 +6,7 @@ use Nette\Database\Table\ActiveRow;
 
 class ProductRepository extends BaseRepository
 {
-    public function pridej_product(Product $product): ActiveRow
+    public function pridejProduct(Product $product): ActiveRow
     {
         bdump($product->prduktove_cislo);
         return $this->database->table('product')
