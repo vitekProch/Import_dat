@@ -7,7 +7,7 @@ use App\Model\Category;
 
 class CategoryRepository extends BaseRepository
 {
-    public function pridejCategory(Category $category)
+    public function addCategory(Category $category)
     {
         $this->database->table('product_category')
             ->insert([

@@ -17,7 +17,7 @@ final class HomepagePresenter extends BasePresenter
         $this->productFacade = $productFacade;
     }
 
-    public function actionPridejData()
+    public function actionAddData()
     {
         $this->productFacade->xx();
         $this->terminate();
