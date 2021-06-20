@@ -21,19 +21,19 @@ class Product
     public $pocet_sklad;
 
     public function __construct(
-        ?int $prduktove_cislo,
-        ?int $katalogove_cislo,
-        ?int $predkontace,
-        string $popis,
-        string $dodatecne_info,
-        ?int $hmotnost,
-        ?int $ryzost,
-        ?int $novinka,
-        ?int $akce,
-        ?int $cena,
-        ?int $zaruka,
-        ?int $zaruka_mesice,
-        ?int $pocet_sklad
+         $prduktove_cislo,
+         $katalogove_cislo,
+         $predkontace,
+         $popis,
+         $dodatecne_info,
+         $hmotnost,
+         $ryzost,
+         $novinka,
+         $akce,
+         $cena,
+         $zaruka,
+         $zaruka_mesice,
+         $pocet_sklad
     )
     {
         $this->prduktove_cislo = $prduktove_cislo;

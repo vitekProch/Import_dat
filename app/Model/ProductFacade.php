@@ -9,6 +9,7 @@ use App\Repository\ProductRepository;
 
 class ProductFacade
 {
+
     public function __construct(ProductRepository $productRepository, CategoryRepository $categoryRepository)
     {
         $this->productRepository = $productRepository;
@@ -46,8 +47,8 @@ class ProductFacade
             }
             // Zapsání produktu do dtb
             $productRow = $this->productRepository->addProduct($productComplete);
-
-            $joinedCategories = $partsOfProduct[2] ?? '';
+            $categoryNames = $partsOfProduct[2];
+            $joinedCategories = $categoryNames ?? '';
             //Rozdělení katerorii podle ';'
             $categoryTypes = explode(";", $joinedCategories);
             //Odstranění přebytečných mezer

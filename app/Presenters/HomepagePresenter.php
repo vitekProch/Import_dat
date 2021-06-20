@@ -8,10 +8,11 @@ use App\Model\ProductFacade;
 
 final class HomepagePresenter extends BasePresenter
 {
-
     /**
-     * HomepagePresenter constructor.
+     * @var ProductFacade
      */
+    private $productFacade;
+
     public function __construct(ProductFacade $productFacade)
     {
         $this->productFacade = $productFacade;
