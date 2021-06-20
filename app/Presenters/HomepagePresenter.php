@@ -19,7 +19,7 @@ final class HomepagePresenter extends BasePresenter
 
     public function actionAddData()
     {
-        $this->productFacade->xx();
+        $this->productFacade->addDataFromDocument();
         $this->terminate();
     }
 }

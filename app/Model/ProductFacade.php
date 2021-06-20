@@ -15,7 +15,7 @@ class ProductFacade
         $this->categoryRepository = $categoryRepository;
     }
 
-    public function xx()
+    public function addDataFromDocument()
     {
         //private const FILE_PATH = __DIR__ . "/../../data.txt";
         //$document = file_get_contents(self::FILE_PATH); //Načteí souboru
