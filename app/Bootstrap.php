@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App;
 
-use Nette\Configurator;
-
+use Nette\Bootstrap\Configurator;
+use Tester\Environment;
 
 class Bootstrap
 {
@@ -35,7 +35,7 @@ class Bootstrap
 	public static function bootForTests(): Configurator
 	{
 		$configurator = self::boot();
-		\Tester\Environment::setup();
+		Environment::setup();
 		return $configurator;
 	}
 }
