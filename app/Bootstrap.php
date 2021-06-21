@@ -25,7 +25,7 @@ class Bootstrap
 
 		$configurator
 			->addConfig(__DIR__ . '/config/common.neon')
-			->addConfig(__DIR__ . '/config/local/database.neon');
+			->addConfig(__DIR__ . '/config/local.neon');
 
 		return $configurator;
 	}

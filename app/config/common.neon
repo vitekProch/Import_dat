@@ -24,5 +24,7 @@ services:
 	- App\Repository\ProductRepository
 	- App\Repository\CategoryRepository
 	- App\Model\ProductFacade
+	- App\Model\ProductMapper
+	- App\Model\CategoryMapper
 
 	router: App\Router\RouterFactory::createRouter
