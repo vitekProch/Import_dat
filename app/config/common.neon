@@ -4,7 +4,6 @@
 #
 parameters:
 
-
 application:
 	errorPresenter: Error
 	mapping:
@@ -24,5 +23,6 @@ services:
 	- App\Repository\BaseRepository
 	- App\Repository\ProductRepository
 	- App\Repository\CategoryRepository
+	- App\Model\ProductFacade
 
 	router: App\Router\RouterFactory::createRouter

@@ -2,13 +2,14 @@
 
 namespace App\Repository;
 use App\Model\Product;
+use Nette\Database\Table\ActiveRow;
 
 class ProductRepository extends BaseRepository
 {
-    public function pridej_product(Product $product)
+    public function addProduct(Product $product): ActiveRow
     {
         bdump($product->prduktove_cislo);
-        $this->database->table('product')
+        return $this->database->table('product')
             ->insert([
                 'produktove_cislo' => $product->prduktove_cislo,
                 'katalogove_cislo' => $product->katalogove_cislo,
@@ -19,8 +20,8 @@ class ProductRepository extends BaseRepository
                 'ryzost' => $product->ryzost,
                 'novinka' => $product->novinka,
                 'akce' => $product->akce,
-                'cena' => $product->zaruka,
-                'zaruka' => $product->zaruka_mesice,
+                'cena' => $product->cena,
+                'zaruka' => $product->zaruka,
                 'delka_zaruky' => $product->zaruka_mesice,
                 'pocet_sklad' => $product->pocet_sklad,
             ]);
