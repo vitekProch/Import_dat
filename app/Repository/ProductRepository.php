@@ -20,8 +20,8 @@ class ProductRepository extends BaseRepository
                 'ryzost' => $product->ryzost,
                 'novinka' => $product->novinka,
                 'akce' => $product->akce,
-                'cena' => $product->zaruka,
-                'zaruka' => $product->zaruka_mesice,
+                'cena' => $product->cena,
+                'zaruka' => $product->zaruka,
                 'delka_zaruky' => $product->zaruka_mesice,
                 'pocet_sklad' => $product->pocet_sklad,
             ]);

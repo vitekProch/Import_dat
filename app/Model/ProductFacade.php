@@ -28,23 +28,23 @@ class ProductFacade
         $individualProduct = explode("*", $document);
         foreach ($individualProduct as $key => $product) {
             $partsOfProduct = explode("|", $individualProduct[$key]);
-            foreach ($partsOfProduct as $productComplete) {
-                $productComplete = new Product(
-                    $partsOfProduct[0] ?? NULL,
-                    $partsOfProduct[1] ?? NULL,
-                    $partsOfProduct[3] ?? NULL,
-                    $partsOfProduct[4] ?? NULL,
-                    $partsOfProduct[5] ?? NULL,
-                    $partsOfProduct[6] ?? NULL,
-                    $partsOfProduct[7] ?? NULL,
-                    $partsOfProduct[8] ?? NULL,
-                    $partsOfProduct[9] ?? NULL,
-                    $partsOfProduct[10] ?? NULL,
-                    $partsOfProduct[11] ?? NULL,
-                    $partsOfProduct[12] ?? NULL,
-                    $partsOfProduct[13] ?? NULL
-                );
-            }
+
+            $productComplete = new Product(
+                $partsOfProduct[0] ?? NULL,
+                $partsOfProduct[1] ?? NULL,
+                $partsOfProduct[3] ?? NULL,
+                $partsOfProduct[4] ?? NULL,
+                $partsOfProduct[5] ?? NULL,
+                $partsOfProduct[6] ?? NULL,
+                $partsOfProduct[7] ?? NULL,
+                $partsOfProduct[8] ?? NULL,
+                $partsOfProduct[9] ?? NULL,
+                $partsOfProduct[10] ?? NULL,
+                $partsOfProduct[11] ?? NULL,
+                $partsOfProduct[12] ?? NULL,
+                $partsOfProduct[13] ?? NULL
+            );
+
             // Zapsání produktu do dtb
             $productRow = $this->productRepository->addProduct($productComplete);
             $categoryNames = $partsOfProduct[2];
