@@ -57,10 +57,16 @@ class ProductFacade
             foreach ($noSpaceCategory as $category) {
 
                 //Použití mapperu pro vytvoření category
-                $categoryComplete = $this->categoryMapper->createNewCategory($productRow->id, $category);
+                $categoryComplete = $this->categoryMapper->createNewCategory($category);
 
-                //Zapsání kategorii do dtb
-                $this->categoryRepository->addCategory($categoryComplete);
+                try
+                {
+                    //Zapsání kategorii do dtb
+                    $this->categoryRepository->addCategory($categoryComplete);
+                }
+                catch (\Exception $e) {
+
+                }
             }
         }
     }
