@@ -1,0 +1,21 @@
+{block content}
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Název kategorie</th>
+        <th scope="col">Počet produktů</th>
+        <th scope="col">Suma všech produktů</th>
+        <th scope="col">Průměr ceny</th>
+    </tr>
+    </thead>
+    <tbody>
+    {foreach $printCategory as $printCategoryes}
+        <tr>
+            <th scope="row">{$printCategoryes->nazev_kategorie}</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+    {/foreach}
+    </tbody>
+</table>

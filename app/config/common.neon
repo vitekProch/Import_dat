@@ -28,5 +28,6 @@ services:
 	- App\Model\ProductFacade
 	- App\Model\ProductMapper
 	- App\Model\CategoryMapper
+	- App\Model\InfoModel
 
 	router: App\Router\RouterFactory::createRouter
