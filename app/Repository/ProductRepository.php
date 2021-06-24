@@ -8,7 +8,6 @@ class ProductRepository extends BaseRepository
 {
     public function addProduct(Product $product): ActiveRow
     {
-        bdump($product->prduktove_cislo);
         return $this->database->table('product')
             ->insert([
                 'produktove_cislo' => $product->prduktove_cislo,

@@ -6,11 +6,20 @@ namespace App\Model;
 
 class Category
 {
-    public $typ;
+    private $typ;
+
     public function __construct(
         string $typ
     )
     {
         $this->typ = $typ;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTyp(): string
+    {
+        return $this->typ;
     }
 }

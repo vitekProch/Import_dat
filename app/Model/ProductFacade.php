@@ -6,6 +6,8 @@ namespace App\Model;
 
 use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
+use App\Repository\ProductToCategoryRepository;
+use Nette\Database\UniqueConstraintViolationException;
 
 class ProductFacade
 {
@@ -18,13 +20,18 @@ class ProductFacade
      * @var CategoryMapper
      */
     private $categoryMapper;
+    /**
+     * @var ProductToCategoryRepository
+     */
+    private $productToCategoryRepository;
 
-    public function __construct(ProductRepository $productRepository, CategoryRepository $categoryRepository, ProductMapper $productMapper, CategoryMapper $categoryMapper)
+    public function __construct(ProductRepository $productRepository, CategoryRepository $categoryRepository, ProductMapper $productMapper, CategoryMapper $categoryMapper, ProductToCategoryRepository $productToCategoryRepository)
     {
         $this->productRepository = $productRepository;
         $this->categoryRepository = $categoryRepository;
         $this->productMapper = $productMapper;
         $this->categoryMapper = $categoryMapper;
+        $this->productToCategoryRepository = $productToCategoryRepository;
     }
 
     public function addDataFromDocument()
@@ -59,14 +66,13 @@ class ProductFacade
                 //Použití mapperu pro vytvoření category
                 $categoryComplete = $this->categoryMapper->createNewCategory($category);
 
-                try
-                {
+                $categoryRow = $this->categoryRepository->getByName($categoryComplete->getTyp());
+                if ($categoryRow === NULL) {
                     //Zapsání kategorii do dtb
-                    $this->categoryRepository->addCategory($categoryComplete);
+                    $categoryRow = $this->categoryRepository->addCategory($categoryComplete);
                 }
-                catch (\Exception $e) {
 
-                }
+                $this->productToCategoryRepository->getProductToCategory($productRow[ProductRepository::COLUMN_ID],$categoryRow[CategoryRepository::COLUMN_ID]);
             }
         }
     }
