@@ -72,7 +72,7 @@ class ProductFacade
                     $categoryRow = $this->categoryRepository->addCategory($categoryComplete);
                 }
 
-                $this->productToCategoryRepository->getProductToCategory($productRow[ProductRepository::COLUMN_ID],$categoryRow[CategoryRepository::COLUMN_ID]);
+                $this->productToCategoryRepository->getProductToCategory($productRow->id,$categoryRow->id);
             }
         }
     }

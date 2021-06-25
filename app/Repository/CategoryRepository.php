@@ -8,14 +8,15 @@ use Nette\Database\Table\ActiveRow;
 
 class CategoryRepository extends BaseRepository
 {
-    public const TABLE_NAME = 'product_category';
+    public const TABLE_NAME_CATEGORY = 'category';
 
-    public const COLUMN_NAME = 'nazev_kategorie';
+    public const COLUMN_NAZEV_CATEGORIE = 'nazev_kategorie';
+
 
     public function getByName(string $name): ?ActiveRow
     {
-        return $this->database->table(self::TABLE_NAME)
-            ->where(self::COLUMN_NAME, $name)
+        return $this->database->table(self::TABLE_NAME_CATEGORY)
+            ->where(self::COLUMN_NAZEV_CATEGORIE, $name)
             // V tabulce je unique index, takze to vrati vzdy jen jeden zaznam
             ->fetch();
     }
@@ -23,10 +24,9 @@ class CategoryRepository extends BaseRepository
 
     public function addCategory(Category $category): ActiveRow
     {
-        return $this->database->table(self::TABLE_NAME)
+        return $this->database->table(self::TABLE_NAME_CATEGORY)
             ->insert([
-                'id_produktu' => $category->id_produktu,
-                self::COLUMN_NAME => $category->getTyp(),
+                self::COLUMN_NAZEV_CATEGORIE => $category->getTyp(),
             ]);
     }
 }

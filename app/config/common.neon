@@ -23,6 +23,8 @@ services:
 	- App\Repository\BaseRepository
 	- App\Repository\ProductRepository
 	- App\Repository\CategoryRepository
+	- App\Repository\ProductToCategoryRepository
+
 	- App\Model\ProductFacade
 	- App\Model\ProductMapper
 	- App\Model\CategoryMapper
