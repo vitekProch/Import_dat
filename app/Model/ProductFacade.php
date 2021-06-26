@@ -9,18 +9,22 @@ use App\Repository\ProductRepository;
 
 class ProductFacade
 {
+    public const FILE_PATH = __DIR__ . '/../../';
+    /**
+     * @var string
+     */
+    private $filename;
 
-    public function __construct(ProductRepository $productRepository, CategoryRepository $categoryRepository)
+    public function __construct(string $filename, ProductRepository $productRepository, CategoryRepository $categoryRepository)
     {
         $this->productRepository = $productRepository;
         $this->categoryRepository = $categoryRepository;
+        $this->filename = $filename;
     }
 
     public function addDataFromDocument()
     {
-        //private const FILE_PATH = __DIR__ . "/../../data.txt";
-        //$document = file_get_contents(self::FILE_PATH); //Načteí souboru
-        $file = "C:\Users\Vitek\Desktop\data.txt";
+        $file = self::FILE_PATH . $this->filename;
         //Načteí souboru
         $document = file_get_contents($file);
 

@@ -3,6 +3,7 @@
 # https://nette.org/security-warning
 #
 parameters:
+    filename: 'data.txt'
 
 application:
 	errorPresenter: Error
@@ -19,10 +20,9 @@ services:
 	- App\Forms\FormFactory
 	- App\Forms\SignInFormFactory
 	- App\Forms\SignUpFormFactory
-
 	- App\Repository\BaseRepository
 	- App\Repository\ProductRepository
 	- App\Repository\CategoryRepository
-	- App\Model\ProductFacade
+	- App\Model\ProductFacade(%filename%)
 
 	router: App\Router\RouterFactory::createRouter
