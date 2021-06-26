@@ -9,12 +9,12 @@
     </tr>
     </thead>
     <tbody>
-    {foreach $printCategory as $printCategoryes}
+    {foreach $printInformation as $printInfo}
         <tr>
-            <th scope="row">{$printCategoryes->nazev_kategorie}</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
+            <th scope="row">{$printInfo->nazev_kategorie}</th>
+            <td>{$printInfo->Pocet_Zaznamu_Hodnoty_Sloupec}</td>
+            <td>{$printInfo->Celkova_cena}</td>
+            <td>{$printInfo->Prumer}</td>
         </tr>
     {/foreach}
     </tbody>

@@ -21,4 +21,5 @@ class ProductToCategoryRepository extends BaseRepository
                 self::TABLE_CATEGORY_ID => $categoryId
             ]);
     }
+
 }

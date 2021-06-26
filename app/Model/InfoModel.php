@@ -2,7 +2,7 @@
 
 
 namespace App\Model;
-
+use Nette;
 
 use App\Repository\CategoryRepository;
 
@@ -19,8 +19,8 @@ class InfoModel
         $this->categoryRepository = $categoryRepository;
     }
 
-    public function getCategory()
+    public function getInformation():Nette\Database\ResultSet
     {
-        return $this->categoryRepository->getCategory();
+        return $this->categoryRepository->getInformation();
     }
 }

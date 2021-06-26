@@ -21,6 +21,6 @@ final class HomepagePresenter extends BasePresenter
     public function actionAddData()
     {
         $this->productFacade->addDataFromDocument();
-        $this->terminate();
+        $this->redirect('Info:info');
     }
 }
