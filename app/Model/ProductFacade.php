@@ -24,14 +24,19 @@ class ProductFacade
      * @var ProductToCategoryRepository
      */
     private $productToCategoryRepository;
+    /**
+     * @var string
+     */
+    private $filename;
 
-    public function __construct(ProductRepository $productRepository, CategoryRepository $categoryRepository, ProductMapper $productMapper, CategoryMapper $categoryMapper, ProductToCategoryRepository $productToCategoryRepository)
+    public function __construct(string $filename,ProductRepository $productRepository, CategoryRepository $categoryRepository, ProductMapper $productMapper, CategoryMapper $categoryMapper, ProductToCategoryRepository $productToCategoryRepository)
     {
         $this->productRepository = $productRepository;
         $this->categoryRepository = $categoryRepository;
         $this->productMapper = $productMapper;
         $this->categoryMapper = $categoryMapper;
         $this->productToCategoryRepository = $productToCategoryRepository;
+        $this->filename = $filename;
     }
 
     public function addDataFromDocument()
